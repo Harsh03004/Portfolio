@@ -77,20 +77,20 @@ export class InteractionManager {
    */
   private setupEventListeners(): void {
     // Mouse move for hover detection
-    window.addEventListener('mousemove', this.handleMouseMove.bind(this))
+    window.addEventListener('mousemove', this.handleMouseMove)
     
     // Click events
-    window.addEventListener('click', this.handleClick.bind(this))
+    window.addEventListener('click', this.handleClick)
     
     // Touch events for mobile
-    window.addEventListener('touchstart', this.handleTouchStart.bind(this))
-    window.addEventListener('touchend', this.handleTouchEnd.bind(this))
+    window.addEventListener('touchstart', this.handleTouchStart)
+    window.addEventListener('touchend', this.handleTouchEnd)
   }
 
   /**
    * Handle mouse movement for hover detection
    */
-  private handleMouseMove(event: MouseEvent): void {
+  private handleMouseMove = (event: MouseEvent): void => {
     if (!this.isEnabled) return
     
     this.updateMousePosition(event.clientX, event.clientY)
@@ -107,8 +107,8 @@ export class InteractionManager {
     const intersection = this.getIntersection()
     
     if (intersection) {
-      const object = intersection.object
-      
+      const object = this.findInteractiveObject(intersection.object)
+      if (!object) return
       // Call object-specific callback
       const callbacks = this.interactiveObjects.get(object)
       if (callbacks?.onClick) {
@@ -136,8 +136,8 @@ export class InteractionManager {
    * Handle touch start for mobile
    */
   private touchStartPosition: { x: number; y: number } | null = null
-  
-  private handleTouchStart(event: TouchEvent): void {
+
+  private handleTouchStart = (event: TouchEvent): void => {
     if (!this.isEnabled || event.touches.length !== 1) return
     
     const touch = event.touches[0]
@@ -147,7 +147,7 @@ export class InteractionManager {
   /**
    * Handle touch end (tap detection)
    */
-  private handleTouchEnd(event: TouchEvent): void {
+  private handleTouchEnd = (event: TouchEvent): void => {
     if (!this.isEnabled || !this.touchStartPosition) return
     
     const touch = event.changedTouches[0]
@@ -161,7 +161,11 @@ export class InteractionManager {
       const intersection = this.getIntersection()
       
       if (intersection) {
-        const object = intersection.object
+        const object = this.findInteractiveObject(intersection.object)
+        if (!object) {
+          this.touchStartPosition = null
+          return
+        }
         
         // Call object-specific callback
         const callbacks = this.interactiveObjects.get(object)
@@ -202,7 +206,9 @@ export class InteractionManager {
    */
   private checkHover(): void {
     const intersection = this.getIntersection()
-    const newHoveredObject = intersection?.object || null
+    const newHoveredObject = intersection
+        ? this.findInteractiveObject(intersection.object)
+        : null
     
     // Handle hover out
     if (this.hoveredObject && this.hoveredObject !== newHoveredObject) {
@@ -245,6 +251,22 @@ export class InteractionManager {
   }
 
   /**
+   * Walk up the hierarchy to find a registered interactive object.
+   */
+  private findInteractiveObject(object: Object3D | null): Object3D | null {
+    let current = object
+
+    while (current) {
+      if (this.interactiveObjects.has(current)) {
+        return current
+      }
+      current = current.parent
+    }
+
+    return null
+  }
+
+  /**
    * Get the closest intersected interactive object
    */
   private getIntersection(): Intersection | null {
@@ -273,10 +295,10 @@ export class InteractionManager {
    * Cleanup event listeners
    */
   dispose(): void {
-    window.removeEventListener('mousemove', this.handleMouseMove.bind(this))
-    window.removeEventListener('click', this.handleClick.bind(this))
-    window.removeEventListener('touchstart', this.handleTouchStart.bind(this))
-    window.removeEventListener('touchend', this.handleTouchEnd.bind(this))
+    window.removeEventListener('mousemove', this.handleMouseMove)
+    window.removeEventListener('click', this.handleClick)
+    window.removeEventListener('touchstart', this.handleTouchStart)
+    window.removeEventListener('touchend', this.handleTouchEnd)
     
     this.interactiveObjects.clear()
   }
