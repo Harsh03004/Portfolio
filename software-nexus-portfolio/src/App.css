@@ -1,0 +1,252 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+.app-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.ui-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-center;
+  z-index: 10;
+}
+
+.hero-content {
+  text-align: center;
+  color: white;
+  pointer-events: auto;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #00ffff 0%, #ff6b9d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: #d1d5db;
+  margin-bottom: 1.5rem;
+}
+
+.performance-indicator {
+  font-size: 0.875rem;
+  color: #9ca3af;
+}
+
+.mode-value {
+  color: #00ffff;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.navigation-info {
+  font-size: 0.875rem;
+  color: #9ca3af;
+  margin-top: 0.75rem;
+  padding: 0.5rem 1rem;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 0.5rem;
+  backdrop-filter: blur(10px);
+}
+
+.zone-value {
+  color: #ff6b9d;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+.project-value {
+  color: #9d4edd;
+  font-weight: 600;
+}
+
+.transition-indicator {
+  color: #ffd700;
+  font-style: italic;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.back-button {
+  margin-top: 1rem;
+  padding: 0.5rem 1.5rem;
+  background: linear-gradient(135deg, #00ffff 0%, #ff6b9d 100%);
+  border: none;
+  border-radius: 0.5rem;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.back-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 255, 255, 0.4);
+}
+
+.back-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.portal-value {
+  color: #ffd700;
+  font-weight: 600;
+}
+
+/* Accessibility Button */
+.accessibility-button {
+  margin-top: 1rem;
+  padding: 0.625rem 1.25rem;
+  background: rgba(0, 255, 255, 0.1);
+  border: 2px solid #00ffff;
+  border-radius: 0.5rem;
+  color: #00ffff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+}
+
+.accessibility-button:hover {
+  background: rgba(0, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 255, 255, 0.3);
+}
+
+.accessibility-button:focus {
+  outline: 2px solid #00ffff;
+  outline-offset: 2px;
+}
+
+.accessibility-button:active {
+  transform: translateY(0);
+}
+
+/* Skip to Content */
+.skip-to-content {
+  position: absolute;
+  left: -9999px;
+  z-index: 999;
+  padding: 1rem 2rem;
+  background: #00ffff;
+  color: #000000;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 0.25rem;
+}
+
+.skip-to-content:focus {
+  left: 50%;
+  top: 1rem;
+  transform: translateX(-50%);
+}
+
+/* Skip 3D Button */
+.skip-3d-button {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 107, 157, 0.1);
+  border: 2px solid #ff6b9d;
+  border-radius: 0.5rem;
+  color: #ff6b9d;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+}
+
+.skip-3d-button:hover {
+  background: rgba(255, 107, 157, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 157, 0.3);
+}
+
+.skip-3d-button:focus {
+  outline: 2px solid #ff6b9d;
+  outline-offset: 2px;
+}
+
+.skip-3d-button:active {
+  transform: translateY(0);
+}
+
+/* Recruiter Mode Button */
+.recruiter-mode-button {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(157, 78, 221, 0.1);
+  border: 2px solid #9d4edd;
+  border-radius: 0.5rem;
+  color: #9d4edd;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+}
+
+.recruiter-mode-button:hover {
+  background: rgba(157, 78, 221, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(157, 78, 221, 0.3);
+}
+
+.recruiter-mode-button:focus {
+  outline: 2px solid #9d4edd;
+  outline-offset: 2px;
+}
+
+.recruiter-mode-button:active {
+  transform: translateY(0);
+}
+

@@ -1,0 +1,317 @@
+/* Accessibility Panel Styles */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.2s ease-out;
+}
+
+.panel {
+  background: linear-gradient(135deg, #1a1a2e 0%, #0a0a0f 100%);
+  border: 2px solid #00ffff;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 255, 255, 0.3);
+  animation: slideIn 0.3s ease-out;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.title {
+  font-size: 1.5rem;
+  color: #00ffff;
+  margin: 0;
+  font-weight: 700;
+}
+
+.closeButton {
+  background: none;
+  border: 2px solid #00ffff;
+  color: #00ffff;
+  font-size: 1.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  background: rgba(0, 255, 255, 0.1);
+  transform: scale(1.1);
+}
+
+.closeButton:focus {
+  outline: 2px solid #00ffff;
+  outline-offset: 2px;
+}
+
+.content {
+  padding: 1.5rem;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.section:last-of-type {
+  margin-bottom: 1rem;
+}
+
+.sectionTitle {
+  font-size: 1.1rem;
+  color: #ff6b9d;
+  margin: 0 0 1rem 0;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.setting {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(0, 255, 255, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 255, 255, 0.1);
+}
+
+.settingInfo {
+  flex: 1;
+}
+
+.settingLabel {
+  display: block;
+  font-size: 1rem;
+  color: #ffffff;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.settingDescription {
+  font-size: 0.875rem;
+  color: #c0c0c0;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Toggle Switch */
+.toggle {
+  position: relative;
+  width: 3rem;
+  height: 1.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.toggle:hover {
+  border-color: #00ffff;
+}
+
+.toggle:focus {
+  outline: 2px solid #00ffff;
+  outline-offset: 2px;
+}
+
+.toggleActive {
+  background: linear-gradient(135deg, #00ffff, #00cccc);
+  border-color: #00ffff;
+}
+
+.toggleSlider {
+  position: absolute;
+  top: 50%;
+  left: 0.15rem;
+  transform: translateY(-50%);
+  width: 1rem;
+  height: 1rem;
+  background: #ffffff;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggleActive .toggleSlider {
+  left: calc(100% - 1.15rem);
+}
+
+/* Keyboard Shortcuts */
+.shortcuts {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.shortcutsTitle {
+  font-size: 0.9rem;
+  color: #00ffff;
+  margin: 0 0 0.75rem 0;
+  font-weight: 600;
+}
+
+.shortcutsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.shortcutItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.shortcutItem:hover {
+  background: rgba(0, 255, 255, 0.05);
+}
+
+.shortcutKey {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: #00ffff;
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+  min-width: 8rem;
+  text-align: center;
+}
+
+.shortcutDescription {
+  font-size: 0.875rem;
+  color: #d0d0d0;
+  flex: 1;
+}
+
+/* Help Text */
+.helpText {
+  padding: 1rem;
+  background: rgba(255, 107, 157, 0.1);
+  border-left: 3px solid #ff6b9d;
+  border-radius: 4px;
+  margin-top: 1.5rem;
+}
+
+.helpText p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #e0e0e0;
+  line-height: 1.5;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .panel {
+    width: 95%;
+    max-height: 90vh;
+  }
+
+  .header {
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .content {
+    padding: 1rem;
+  }
+
+  .setting {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .toggle {
+    align-self: flex-end;
+  }
+
+  .shortcutKey {
+    min-width: 6rem;
+    font-size: 0.7rem;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .panel,
+  .toggle,
+  .toggleSlider {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .panel {
+    border-width: 3px;
+  }
+
+  .toggle {
+    border-width: 3px;
+  }
+
+  .settingLabel {
+    font-weight: 700;
+  }
+}
+

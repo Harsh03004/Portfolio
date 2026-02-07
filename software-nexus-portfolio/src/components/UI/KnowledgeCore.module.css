@@ -1,0 +1,597 @@
+/* Knowledge Core Styles */
+
+.knowledgeCore {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+  color: #e0e0e0;
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow-y: auto;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Hero Section */
+
+.heroSection {
+  text-align: center;
+  padding: 3rem 0;
+  margin-bottom: 3rem;
+  border-bottom: 2px solid rgba(0, 255, 255, 0.2);
+  animation: fadeIn 0.8s ease-out;
+}
+
+.heroSection h1 {
+  font-size: 3.5rem;
+  margin: 0;
+  background: linear-gradient(135deg, #00ffff, #ff6b9d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.heroSection p {
+  font-size: 1.3rem;
+  color: #9d4edd;
+  margin-bottom: 1rem;
+}
+
+.heroSubtitle {
+  color: #00ff88;
+  font-size: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Problem-Solving Approach Section */
+
+.approachSection {
+  margin: 3rem 0;
+  animation: slideInUp 0.8s ease-out 0.2s both;
+}
+
+.approachSection h2 {
+  font-size: 2rem;
+  color: #00ffff;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+  padding-bottom: 1rem;
+}
+
+.approachTimeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  position: relative;
+}
+
+.approachStep {
+  background: rgba(0, 255, 255, 0.05);
+  border: 2px solid rgba(0, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.approachStep:hover {
+  border-color: #00ffff;
+  background: rgba(0, 255, 255, 0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+}
+
+.stepIcon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.stepContent h4 {
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+}
+
+.stepContent p {
+  color: #c0c0c0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.stepConnector {
+  display: none;
+}
+
+@media (min-width: 769px) {
+  .approachStep {
+    text-align: left;
+    padding-left: 4rem;
+  }
+
+  .stepIcon {
+    position: absolute;
+    left: 1.5rem;
+    top: 2rem;
+    margin-bottom: 0;
+  }
+}
+
+/* Research Section */
+
+.researchSection {
+  margin: 3rem 0;
+  animation: slideInUp 0.8s ease-out 0.4s both;
+}
+
+.researchSection h2 {
+  font-size: 2rem;
+  color: #00ffff;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+  padding-bottom: 1rem;
+}
+
+.researchIntro {
+  color: #c0c0c0;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  max-width: 800px;
+}
+
+.researchGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+/* Research Card */
+
+.researchCard {
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.05), rgba(157, 78, 221, 0.05));
+  border: 2px solid rgba(0, 255, 255, 0.3);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.researchCard:hover {
+  border-color: #00ffff;
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(157, 78, 221, 0.1));
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 255, 255, 0.25);
+}
+
+.researchCardSelected {
+  border-color: #ff6b9d;
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.15), rgba(255, 107, 157, 0.1));
+  box-shadow: 0 15px 40px rgba(255, 107, 157, 0.25);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.cardNumber {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #00ffff;
+  min-width: 40px;
+  text-align: center;
+}
+
+.cardHeader h3 {
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.4;
+  flex: 1;
+}
+
+.cardBody {
+  flex: 1;
+  padding: 0 1.5rem 1.5rem 1.5rem;
+}
+
+.methodology {
+  margin-bottom: 1rem;
+}
+
+.methodologyLabel {
+  display: block;
+  font-size: 0.85rem;
+  color: #9d4edd;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.methodology p {
+  color: #d0d0d0;
+  font-size: 0.95rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.cardExpanded {
+  animation: slideDown 0.3s ease;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.cardExpanded h4 {
+  font-size: 1rem;
+  color: #00ffff;
+  margin: 0 0 1rem 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.findingsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.findingItem {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.findingNumber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  background: #9d4edd;
+  color: #0a0a0f;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.findingText {
+  color: #d0d0d0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid rgba(0, 255, 255, 0.2);
+  background: rgba(0, 255, 255, 0.03);
+  font-size: 0.9rem;
+}
+
+.findingsCount {
+  color: #00ffff;
+  font-weight: 600;
+}
+
+.expandIndicator {
+  color: #ff6b9d;
+  font-weight: bold;
+  transition: transform 0.3s ease;
+}
+
+.researchCardSelected .expandIndicator {
+  transform: rotate(180deg);
+}
+
+/* Learning Journey Section */
+
+.journeySection {
+  margin: 3rem 0;
+  animation: slideInUp 0.8s ease-out 0.6s both;
+}
+
+.journeySection h2 {
+  font-size: 2rem;
+  color: #00ffff;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+  padding-bottom: 1rem;
+}
+
+.journeyTimeline {
+  position: relative;
+  padding: 2rem 0;
+}
+
+.journeyTimeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, #00ffff, transparent);
+}
+
+@media (max-width: 768px) {
+  .journeyTimeline::before {
+    left: 15px;
+  }
+}
+
+.journeyEntry {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+  padding-left: 60px;
+}
+
+@media (max-width: 768px) {
+  .journeyEntry {
+    padding-left: 40px;
+  }
+}
+
+.journeyYear {
+  position: absolute;
+  left: -30px;
+  top: 0;
+  width: 60px;
+  height: 40px;
+  background: #9d4edd;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 12px rgba(157, 78, 221, 0.4);
+}
+
+@media (max-width: 768px) {
+  .journeyYear {
+    left: -45px;
+    width: 50px;
+    font-size: 0.8rem;
+  }
+}
+
+.journeyContent {
+  flex: 1;
+  background: rgba(0, 255, 255, 0.05);
+  border-left: 3px solid #00ffff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.journeyContent:hover {
+  background: rgba(0, 255, 255, 0.1);
+  transform: translateX(5px);
+}
+
+.journeyMilestone {
+  color: #ffffff;
+  font-size: 1rem;
+  margin: 0 0 1rem 0;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.journeyTechs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.techTag {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff6b9d, #9d4edd);
+  color: #ffffff;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Insights Section */
+
+.insightsSection {
+  margin: 3rem 0;
+  animation: slideInUp 0.8s ease-out 0.8s both;
+}
+
+.insightsSection h2 {
+  font-size: 2rem;
+  color: #00ffff;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+  padding-bottom: 1rem;
+}
+
+.insightsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.insightCard {
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.08), rgba(157, 78, 221, 0.08));
+  border: 2px solid rgba(255, 107, 157, 0.3);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.insightCard:hover {
+  border-color: #ff6b9d;
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.12), rgba(255, 107, 157, 0.12));
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(255, 107, 157, 0.2);
+}
+
+.insightIcon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.insightCard h3 {
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin: 0 0 0.75rem 0;
+}
+
+.insightCard p {
+  color: #c0c0c0;
+  margin: 0;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+/* Animations */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+  .knowledgeCore {
+    padding: 1rem;
+  }
+
+  .heroSection h1 {
+    font-size: 2.5rem;
+  }
+
+  .heroSection p {
+    font-size: 1.1rem;
+  }
+
+  .approachSection h2,
+  .researchSection h2,
+  .journeySection h2,
+  .insightsSection h2 {
+    font-size: 1.5rem;
+  }
+
+  .approachTimeline {
+    grid-template-columns: 1fr;
+  }
+
+  .researchGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .insightsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroSection {
+    padding: 2rem 0;
+  }
+
+  .heroSection h1 {
+    font-size: 2rem;
+  }
+
+  .heroSection p {
+    font-size: 1rem;
+  }
+
+  .cardHeader {
+    flex-direction: column;
+  }
+
+  .cardNumber {
+    width: 100%;
+    text-align: left;
+  }
+
+  .journeyEntry {
+    padding-left: 20px;
+  }
+
+  .journeyYear {
+    left: -35px;
+    width: 45px;
+  }
+}
+
