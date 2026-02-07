@@ -100,7 +100,7 @@ export class InteractionManager {
   /**
    * Handle click events
    */
-  private handleClick(event: MouseEvent): void {
+  private handleClick = (event: MouseEvent): void => {
     if (!this.isEnabled) return
     
     this.updateMousePosition(event.clientX, event.clientY)

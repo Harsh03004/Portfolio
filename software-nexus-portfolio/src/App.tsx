@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Scene from './components/3D/Scene'
 import CameraRig from './components/3D/CameraRig'
 import CameraPathVisualizer from './components/3D/CameraPathVisualizer'
@@ -10,11 +10,10 @@ import FallbackUI from './components/UI/FallbackUI'
 import RecruiterMode from './components/UI/RecruiterMode'
 import { useScrollNavigation } from './hooks/useScrollNavigation'
 import { useNavigationState } from './hooks/useNavigationState'
-import { usePortal } from './hooks/usePortal'
 import { useAccessibility, useScreenReaderAnnounce } from './hooks/useAccessibility'
 import { useRecruiterMode } from './hooks/useRecruiterMode'
 import { PerformanceMode } from './lib/types'
-import { getSceneAriaLabel, getSceneAriaDescription, getZoneLabel } from './lib/utils/accessibility'
+import { getSceneAriaLabel, getSceneAriaDescription } from './lib/utils/accessibility'
 import {
   checkWebGLSupport,
   shouldActivateFallback,
@@ -31,34 +30,13 @@ function App() {
   const [showAccessibilityPanel, setShowAccessibilityPanel] = useState(false)
   const [useFallbackUI, setUseFallbackUI] = useState(false)
   const [fallbackMode, setFallbackMode] = useState<FallbackMode | null>(null)
-
-  const { 
-    scrollProgress, 
-    scrollVelocity, 
-    scrollDirection,
-    jumpToZone 
-  } = useScrollNavigation({
-    smoothing: 0.1,
-    sensitivity: 0.001,
-    enabled: true
-  })
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const mainContentRef = useRef<HTMLElement | null>(null)
 
   const {
-    mode,
-    currentZone,
-    activeProject,
-    isTransitioning,
     navigateToZone,
-    enterProjectMode,
-    goBack,
-    canGoBack
+    enterProjectMode
   } = useNavigationState()
-
-  const {
-    portalState,
-    activeProject: portalProject,
-    isInPortal
-  } = usePortal()
 
   const { shouldReduceMotion, keyboardShortcutsEnabled } = useAccessibility()
   const { announcement, announce } = useScreenReaderAnnounce()
@@ -66,6 +44,26 @@ function App() {
     autoDetect: true,
     trackDownloads: true
   })
+
+  const isNon3DView = isRecruiterMode || useFallbackUI
+
+  const {
+    scrollProgress,
+    scrollVelocity,
+    scrollDirection,
+    jumpToZone
+  } = useScrollNavigation({
+    smoothing: 0.1,
+    sensitivity: 0.001,
+    enabled: !(isNon3DView || showAccessibilityPanel)
+  })
+
+  useEffect(() => {
+    document.body.classList.toggle('non-3d', isNon3DView)
+    return () => {
+      document.body.classList.remove('non-3d')
+    }
+  }, [isNon3DView])
 
   // Check for fallback requirements on mount
   useEffect(() => {
@@ -151,9 +149,15 @@ function App() {
   return (
     <div className="app-container">
       {/* Skip to Content Link */}
-      <a href="#main-content" className="skip-to-content">
+      <button
+        type="button"
+        className="skip-to-content"
+        onClick={() => mainContentRef.current?.focus()}
+      >
         Skip to main content
-      </a>
+      </button>
+
+      <div id="main-content" tabIndex={-1} />
 
       {/* Screen Reader Announcements */}
       <div
@@ -173,7 +177,9 @@ function App() {
 
       {/* 3D Scene */}
       <main
-        id="main-content"
+        id="scene-content"
+        ref={mainContentRef}
+        tabIndex={-1}
         role="main"
         aria-label={getSceneAriaLabel()}
         aria-describedby="scene-description"
@@ -209,76 +215,54 @@ function App() {
 
       {/* UI Overlay */}
       <div className="ui-overlay">
-        <div className="hero-content">
-          <h1 className="hero-title">
-            Software Nexus Portfolio
-          </h1>
-          <p className="hero-subtitle">
-            Explore the Fantasy-Tech Engineering World
-          </p>
-
-          {/* Accessibility Button */}
+        <div className="top-right-menu">
           <button
-            className="accessibility-button"
-            onClick={() => setShowAccessibilityPanel(true)}
-            aria-label="Open accessibility settings"
-            title="Accessibility Settings"
+            className="menu-button"
+            onClick={() => setIsMenuOpen((prev) => !prev)}
+            aria-label="Toggle menu"
+            aria-expanded={isMenuOpen}
           >
-            ♿ Accessibility
+            ☰
           </button>
-
-          {/* Skip 3D Button */}
-          <button
-            className="skip-3d-button"
-            onClick={handleEnableFallback}
-            aria-label="Skip 3D experience and use text-based version"
-            title="Use text-based version"
-          >
-            Skip 3D Experience
-          </button>
-
-          {/* Recruiter Mode Button */}
-          <button
-            className="recruiter-mode-button"
-            onClick={enableRecruiterMode}
-            aria-label="Switch to recruiter-optimized view"
-            title="Fast-loading recruiter view"
-          >
-            👔 Recruiter View
-          </button>
-
-          <div className="performance-indicator" role="status" aria-live="polite">
-            Performance Mode: <span className="mode-value">{performanceMode}</span>
-          </div>
-          <div className="navigation-info" role="status" aria-live="polite">
-            Mode: <span className="mode-value">{mode}</span>
-            {currentZone && (
-              <> | Zone: <span className="zone-value">{getZoneLabel(parseInt(currentZone.split('-')[0]) || 0)}</span></>
-            )}
-            {activeProject && (
-              <> | Project: <span className="project-value">{activeProject}</span></>
-            )}
-            {isInPortal && portalProject && (
-              <> | Portal: <span className="portal-value">{portalProject.title}</span></>
-            )}
-            {isTransitioning && (
-              <span className="transition-indicator"> (Transitioning...)</span>
-            )}
-            {portalState === 'opening' && (
-              <span className="transition-indicator"> (Entering Portal...)</span>
-            )}
-            {portalState === 'closing' && (
-              <span className="transition-indicator"> (Exiting Portal...)</span>
-            )}
-          </div>
-          {canGoBack() && (
-            <button
-              className="back-button"
-              onClick={goBack}
-              aria-label="Go back to previous view"
-            >
-              ← Back
-            </button>
+          {isMenuOpen && (
+            <div className="menu-panel" role="menu" aria-label="Quick actions">
+              <button
+                className="accessibility-button"
+                onClick={() => {
+                  setShowAccessibilityPanel(true)
+                  setIsMenuOpen(false)
+                }}
+                aria-label="Open accessibility settings"
+                title="Accessibility Settings"
+                role="menuitem"
+              >
+                ♿ Accessibility
+              </button>
+              <button
+                className="skip-3d-button"
+                onClick={() => {
+                  handleEnableFallback()
+                  setIsMenuOpen(false)
+                }}
+                aria-label="Skip 3D experience and use text-based version"
+                title="Use text-based version"
+                role="menuitem"
+              >
+                Skip 3D Experience
+              </button>
+              <button
+                className="recruiter-mode-button"
+                onClick={() => {
+                  enableRecruiterMode()
+                  setIsMenuOpen(false)
+                }}
+                aria-label="Switch to recruiter-optimized view"
+                title="Fast-loading recruiter view"
+                role="menuitem"
+              >
+                👔 Recruiter View
+              </button>
+            </div>
           )}
         </div>
       </div>

@@ -130,10 +130,10 @@ export const RecruiterMode: React.FC<RecruiterModeProps> = ({
       </nav>
 
       {/* Content Area */}
-      <main className={styles.mainContent}>
+      <main className={styles.mainContent} role="main" aria-label="Resume content">
         {/* Overview Section */}
         {activeSection === 'overview' && (
-          <section className={styles.section}>
+          <section className={styles.section} aria-label="Overview">
             <h2>Professional Overview</h2>
             <div className={styles.overviewGrid}>
               <div className={styles.overviewCard}>
@@ -168,7 +168,7 @@ export const RecruiterMode: React.FC<RecruiterModeProps> = ({
 
         {/* Experience Section */}
         {activeSection === 'experience' && (
-          <section className={styles.section}>
+          <section className={styles.section} aria-label="Experience">
             <h2>Professional Experience</h2>
             <div className={styles.experienceList}>
               {content.experience.map((exp, index) => (
@@ -193,7 +193,7 @@ export const RecruiterMode: React.FC<RecruiterModeProps> = ({
 
         {/* Projects Section */}
         {activeSection === 'projects' && (
-          <section className={styles.section}>
+          <section className={styles.section} aria-label="Projects">
             <h2>Featured Projects</h2>
             <div className={styles.projectsGrid}>
               {content.projects.map((project) => (
@@ -224,7 +224,7 @@ export const RecruiterMode: React.FC<RecruiterModeProps> = ({
 
         {/* Skills Section */}
         {activeSection === 'skills' && (
-          <section className={styles.section}>
+          <section className={styles.section} aria-label="Skills">
             <h2>Technical Skills</h2>
             <div className={styles.skillsGrid}>
               {Object.entries(
@@ -262,7 +262,7 @@ export const RecruiterMode: React.FC<RecruiterModeProps> = ({
 
         {/* Certifications Section */}
         {activeSection === 'certifications' && (
-          <section className={styles.section}>
+          <section className={styles.section} aria-label="Certifications">
             <h2>Certifications & Credentials</h2>
             <div className={styles.certsGrid}>
               {content.certifications.map((cert, index) => (

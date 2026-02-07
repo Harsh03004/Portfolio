@@ -19,19 +19,33 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
   overflow: hidden;
 }
 
 #root {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   overflow: hidden;
+}
+
+body.non-3d {
+  overflow-y: auto;
+}
+
+body.non-3d #root {
+  height: auto;
+  min-height: 100vh;
+  overflow-y: auto;
+  overflow-x: auto;
 }
 
 /* Reduced Motion Preferences */
@@ -77,4 +91,3 @@ body {
   top: 1rem;
   transform: translateX(-50%);
 }
-
